@@ -1,6 +1,7 @@
 const express = require('express');
 const myHelper = require('../util/helper')
-const underscore = require('underscore')
+const underscore = require('underscore');
+const { response } = require('express');
 
 const router = express.Router();
 
@@ -15,8 +16,27 @@ router.get('/test-me', function (req, res) {
 
 router.get('/hello', function (req, res) {
    
-    res.send('Hello there!')
+    res.send('Hello there, this is my first ever API!')
 });
+router.get('/candidates', function(req,res){
+    console.log('query parameters for this request are ' + JSON.stringify(req.query))
+    let gender=req.query.gender
+    let state = req.query.state
+    let district = req.query.district
+    console.log('state is' +state)
+    console.log('gender is' +gender)
+    console.log('district is' +district)
+    let candidates = ['Akash', 'suman']
+    res.send(candidates)
+});
+
+router.get('/candidates/:name' , function(req,res){
+    console.log('the requested object is' + JSON.stringify(req.params))
+    console.log("candidates name is" + req.params.name)
+    res.send('done')
+        
+})
+
 
 router.get('/candidates', function(req, res){
     console.log('Query paramters for this request are '+JSON.stringify(req.query))
